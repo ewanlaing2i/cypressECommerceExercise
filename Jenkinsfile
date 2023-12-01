@@ -17,7 +17,7 @@ pipeline {
                 script {
                     //TEST
                     // Run Cypress tests
-                    bat 'npx cypress run --spec cypress/e2e/mainTest.cy.js'
+                    bat 'npx cypress run --spec cypress/e2e/testCase1.cy.js'
                 }
             }
         }
