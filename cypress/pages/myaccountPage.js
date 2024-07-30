@@ -1,19 +1,28 @@
-class myaccountPage{
+class myAccountPage{
 
-    elements = {
-        ordersLink : () => cy.get('.woocommerce-MyAccount-navigation-link--orders > a'),
-        logoutLink : () => cy.contains('Logout')
+// I would update this page object to contain the login page object as you can only find login stuff here.
+// You can take the same approach as the navbar page object (splitting up the page with different objects)
+
+
+    // I like to add page element and function here, if the element changes the function doesnt need changing.
+    // Its also nicer to keep things organised.
+    login = {
+        usernameEmailField : () => cy.get('#username'),
+        passwordField : () => cy.get('#password'),
+        rememberMeCheckbox : () => cy.get(),
+        loginButton : () => cy.contains('Log in'),
+        lostPasswordLink : () => cy.get(),
+
+        //page functions
+        enterUserLoginDetails : (email, password) => {
+            this.usernameEmailField.type(email),
+            this.passwordField.type(password)
+        }
     }
 
-    goToOrdersPage(){;
-        this.elements.ordersLink().click();
-    }
 
-    logout(){
-        this.elements.logoutLink().click()
-    }
 
 
 }
 
-module.exports = new myaccountPage();
+module.exports = new myAccountPage();

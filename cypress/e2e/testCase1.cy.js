@@ -6,9 +6,9 @@ import shopPage from "../pages/shopPage";
 import cartPage from "../pages/cartPage";
 import checkoutPage from "../pages/checkoutPage";
 import orderConfirmationPage from "../pages/orderConfirmationPage";
-import myaccountPage from "../pages/myaccountPage";
+import myaccountPage from "../pages/myAccountPage";
 import ordersPage from "../pages/ordersPage";
-
+import myAccountPage from "../pages/myAccountPage";
 
 describe('template spec', () => {
 
@@ -17,10 +17,24 @@ describe('template spec', () => {
     cy.fixture("validUserData").as('userData');
     cy.visit('https://www.edgewordstraining.co.uk/demo-site/my-account/');
     cy.get('@userData').then(data => {
-      loginPage.login(data.email, data.password);
+
+    //because we made this only enter user details, we can reuse it for negative testing of invalid creds.
+      myAccountPage.login.enterUserLoginDetails(data.email, data.password);
+      myAccountPage.login.loginButton.click();
+      //loginPage.login(data.email, data.password);
     })
+
+
     navbar.goToShopPage();
+
     shopPage.addBeanieToCart();
+    //Im not sure if this works as is, my VSCode isnt setup for JS. But this is how it looks.
+    // Your on the shop page and have access to the navbar.
+    // This approach is really good when you have a big page made up of lots of different areas and
+    // want to split it up into different page objects. This can be really powerful when multiple pages
+    // use the thing on each page. Just create a single page object and use composition to pull it in.
+    shopPage.navbar.basket.itemCount.contains(1);
+
     navbar.goToCartPage();
   })
 
