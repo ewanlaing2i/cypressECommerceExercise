@@ -7,7 +7,7 @@ pipeline {
                 script {
  
                     // Install project dependencies including Cypress
-                    bat 'npm install'
+                    sh 'npm install'
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
                 script {
                     //TEST
                     // Run Cypress tests
-                    bat 'npx cypress run --spec cypress/e2e/testCase1.cy.js'
+                    sh 'npx cypress run --spec cypress/e2e/testCase1.cy.js'
                 }
             }
         }
