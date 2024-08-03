@@ -52,7 +52,7 @@ describe('template spec', () => {
   it('Stores an order number', () => {
     cartPage.checkout();
     cy.fixture("validUserData").as('userData').then(data => {
-      checkoutPage.placeOrder(data.firstName, data.lastName, data.city, data.postCode, data.phoneNumber, data.email);
+      checkoutPage.placeOrder(data.firstName, data.lastName, data.street, data.city, data.postCode, data.phoneNumber, data.email);
     })
     orderConfirmationPage.getOrderNumber().then((orderNumberElement) => {
       const orderNo = orderNumberElement.text();

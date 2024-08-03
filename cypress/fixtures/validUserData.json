@@ -1,6 +1,7 @@
 {
     "firstName": "Ewan",
     "lastName" : "Laing",
+    "street" : "101 Fictional Ave",
     "email": "ewan.laing@2itesting.com",
     "password": "2passiwordtesting",
     "city" : "Glasgow",
