@@ -1,12 +1,16 @@
 pipeline {
-    agent any
- 
+    agent {
+        docker {
+            image 'cypress/included:10.11.0' 
+            args '-u root' 
+        }
+    }
     stages {
         stage('Checkout and Install Dependencies') {
             steps {
                 script {
  
-                    // Install project dependencies including Cypress
+                    
                     sh 'npm install'
                 }
             }
@@ -15,8 +19,6 @@ pipeline {
         stage('Run Cypress Tests') {
             steps {
                 script {
-                    //TEST
-                    // Run Cypress tests
                     sh 'npx cypress run --spec cypress/e2e/testCase1.cy.js'
                 }
             }
