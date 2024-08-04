@@ -1,10 +1,14 @@
 pipeline {
-    agent any
-
-    environment {
-        DOCKER_WORKDIR = '/c/ProgramData/Jenkins/.jenkins/workspace/cypresstests'
+    agent {
+        docker {
+            image 'cypress/base:14.16.0'
+            args '-u root'
+        }
     }
-   stages {
+    environment {
+        CI = 'true'
+    }
+    stages {
         stage('Checkout SCM') {
             steps {
                 checkout scm
@@ -13,19 +17,25 @@ pipeline {
         stage('Run Cypress Tests') {
             steps {
                 script {
-                    docker.image('cypress/base:14.16.0').inside("-u root -w ${env.DOCKER_WORKDIR} -v ${env.DOCKER_WORKDIR}:${env.DOCKER_WORKDIR} -v ${env.DOCKER_WORKDIR}@tmp:${env.DOCKER_WORKDIR}@tmp") {
-                        sh 'npm install'
-                        sh 'npx cypress run'
-                    }
+                    // Converting Windows path to Unix path for Docker
+                    def workspaceUnixPath = sh(script: 'cygpath -u "$WORKSPACE"', returnStdout: true).trim()
+
+                    // Running Cypress tests within Docker
+                    sh """
+                        docker run --rm \
+                        -v ${workspaceUnixPath}:/e2e \
+                        -w /e2e \
+                        cypress/base:14.16.0 \
+                        npx cypress run --reporter junit --reporter-options "mochaFile=results/test-output-[hash].xml"
+                    """
                 }
             }
         }
     }
-
     post {
         always {
-            archiveArtifacts artifacts: 'cypress/screenshots/**, cypress/videos/**', allowEmptyArchive: true
-            junit 'cypress/results/*.xml'
+            archiveArtifacts artifacts: 'results/test-output-*.xml', allowEmptyArchive: true
+            junit 'results/test-output-*.xml'
         }
     }
 }
