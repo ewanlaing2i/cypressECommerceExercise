@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    tools {
+        nodejs 'NodeJS 22' 
+    }
+    environment {
+        CI = 'true'
+    }
+    stages {
+        stage('Checkout SCM') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install dependencies using npm
+                    bat 'npm install'
+                    bat 'npx cypress install'
+                }
+            }
+        }
+        stage('Run Cypress Tests') {
+            steps {
+                script {
+                    // Run Cypress tests and generate JUnit reports
+                    bat 'browserstack-cypress run'
+                }
+            }
+        }
+    }
+}
