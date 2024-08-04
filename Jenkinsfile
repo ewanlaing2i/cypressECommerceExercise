@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'cypress/base:14.16.0'
-            args '-u root'
-        }
-    }
+    agent any
     environment {
         CI = 'true'
     }
@@ -14,20 +9,19 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Install dependencies using npm
+                    bat 'npm install'
+                }
+            }
+        }
         stage('Run Cypress Tests') {
             steps {
                 script {
-                    // Converting Windows path to Unix path for Docker
-                    def workspaceUnixPath = sh(script: 'cygpath -u "$WORKSPACE"', returnStdout: true).trim()
-
-                    // Running Cypress tests within Docker
-                    sh """
-                        docker run --rm \
-                        -v ${workspaceUnixPath}:/e2e \
-                        -w /e2e \
-                        cypress/base:14.16.0 \
-                        npx cypress run --reporter junit --reporter-options "mochaFile=results/test-output-[hash].xml"
-                    """
+                    // Run Cypress tests and generate JUnit reports
+                    bat 'npx cypress run --reporter junit --reporter-options "mochaFile=results/test-output-[hash].xml"'
                 }
             }
         }
