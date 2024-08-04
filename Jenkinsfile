@@ -17,7 +17,7 @@ pipeline {
                 script {
                     // Install dependencies using npm
                     bat 'npm install'
-                    bat 'npm install cypress --save-dev'
+                    bat 'npx cypress install'
                 }
             }
         }
