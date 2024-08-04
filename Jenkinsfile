@@ -29,6 +29,14 @@ pipeline {
                 }
             }
         }
+        stage('Run Browserstack Tests') {
+            steps {
+                script {
+                    // Run Browserstack tests
+                    bat 'browserstack-cypress run'
+                }
+            }
+        }
     }
     post {
         always {
