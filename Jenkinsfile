@@ -18,6 +18,7 @@ pipeline {
                     // Install dependencies using npm
                     bat 'npm install'
                     bat 'npx cypress install'
+                    bat 'npm install -g browserstack-cypress-cli'
                 }
             }
         }
