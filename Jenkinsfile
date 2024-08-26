@@ -15,7 +15,6 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
-                    // Install dependencies using npm
                     bat 'npm install'
                     bat 'npx cypress install'
                     bat 'npm install -g browserstack-cypress-cli'
@@ -25,7 +24,6 @@ pipeline {
         stage('Run Cypress Tests') {
             steps {
                 script {
-                    // Run Cypress tests and generate JUnit reports
                     bat 'npx cypress run --reporter junit --reporter-options "mochaFile=results/test-output-[hash].xml"'
                 }
             }
@@ -33,15 +31,13 @@ pipeline {
         stage('Run K6 Tests') {
             steps {
                 script {
-                    // Run Cypress tests and generate JUnit reports
                     bat 'k6 run k6test.js'
                 }
             }
         }
         stage('Run Browserstack Tests') {
             steps {
-                script {g
-                    // Run Browserstack tests
+                script {
                     bat 'browserstack-cypress run'
                 }
             }
