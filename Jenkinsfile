@@ -28,17 +28,17 @@ pipeline {
                 }
             }
         }
-        stage('Run K6 Tests') {
-            steps {
-                script {
-                    bat 'k6 run k6test.js'
-                }
-            }
-        }
         stage('Run Browserstack Tests') {
             steps {
                 script {
                     bat 'browserstack-cypress run'
+                }
+            }
+        }
+        stage('Run K6 Tests') {
+            steps {
+                script {
+                    bat 'k6 run k6test.js'
                 }
             }
         }
