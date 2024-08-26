@@ -1,7 +1,7 @@
 {
     "auth": {
-        "username": "ewanlaing_IVR6MQ",
-        "access_key": "YfZ4gLyr2MozzTEgqmGx"
+        "username": "ewanlaing_fnkMXI",
+        "access_key": "jbXdpxZVFXDcQjzgjsMh"
     },
     "browsers": [
         {
@@ -13,64 +13,8 @@
             ]
         },
         {
-            "browser": "firefox",
-            "os": "Windows 10",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
             "browser": "edge",
             "os": "Windows 10",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "chrome",
-            "os": "OS X Mojave",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "firefox",
-            "os": "OS X Mojave",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "edge",
-            "os": "OS X Mojave",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "chrome",
-            "os": "OS X Catalina",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "firefox",
-            "os": "OS X Catalina",
-            "versions": [
-                "latest",
-                "latest-1"
-            ]
-        },
-        {
-            "browser": "edge",
-            "os": "OS X Catalina",
             "versions": [
                 "latest",
                 "latest-1"
@@ -82,7 +26,7 @@
         "project_name": "project-name",
         "build_name": "build-name",
         "exclude": [],
-        "parallels": 5,
+        "parallels": 2,
         "npm_dependencies": {},
         "package_config_options": {},
         "headless": true
