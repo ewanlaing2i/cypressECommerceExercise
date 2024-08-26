@@ -24,7 +24,7 @@ pipeline {
         stage('Run Cypress Tests') {
             steps {
                 script {
-                    bat 'npx cypress run --reporter junit --reporter-options "mochaFile=results/test-output-[hash].xml"'
+                    bat 'npx cypress run --reporter junit'
                 }
             }
         }
